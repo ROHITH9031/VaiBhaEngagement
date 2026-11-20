@@ -1,21 +1,40 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { CalendarHeart, Menu, X } from 'lucide-react';
 
 const navItems = [
   { label: 'Home', href: '#home' },
   { label: 'Invitation', href: '#invitation' },
   { label: 'Celebration', href: '#celebration' },
-  { label: 'Venue', href: '#venue' },
+  { label: 'Journey', href: '#journey' },
+  { label: 'Location', href: '#venue' },
 ];
 
-export default function Navbar() {
+export default function Navbar({ onSectionSelect }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [activeMobileSection, setActiveMobileSection] = useState('home');
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 80);
+      if (window.matchMedia('(max-width: 767px)').matches) {
+        const sectionIds = ['home', 'invitation', 'celebration', 'journey', 'venue', 'save-the-date'];
+        let nearestSection = 'home';
+        let nearestDistance = Number.POSITIVE_INFINITY;
+
+        sectionIds.forEach((sectionId) => {
+          const section = document.getElementById(sectionId);
+          if (!section) return;
+          const distance = Math.abs(section.getBoundingClientRect().top - 80);
+          if (distance < nearestDistance) {
+            nearestDistance = distance;
+            nearestSection = sectionId;
+          }
+        });
+
+        setActiveMobileSection(nearestSection);
+      }
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
@@ -24,12 +43,28 @@ export default function Navbar() {
   const handleNavClick = (e, href) => {
     e.preventDefault();
     setIsMobileOpen(false);
+    const sectionId = href.replace('#', '');
+    setActiveMobileSection(sectionId);
+    onSectionSelect?.(sectionId);
     const el = document.querySelector(href);
     if (el) {
+      window.dispatchEvent(new Event('vaibha:navigation'));
       el.scrollIntoView({ behavior: 'smooth' });
-      el.focus({ preventScroll: true });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
+
+  const handleSaveTheDate = (e) => {
+    handleNavClick(e, '#save-the-date');
+  };
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 767px)');
+    if (!mediaQuery.matches) {
+      setActiveMobileSection('');
+    }
+  }, []);
 
   return (
     <motion.nav
@@ -64,11 +99,21 @@ export default function Navbar() {
               key={item.href}
               href={item.href}
               onClick={(e) => handleNavClick(e, item.href)}
-              className="nav-link"
+              className={`nav-link ${activeMobileSection === item.href.replace('#', '') ? 'is-active' : ''}`}
+              aria-current={activeMobileSection === item.href.replace('#', '') ? 'page' : undefined}
             >
               {item.label}
             </a>
           ))}
+          <button
+            type="button"
+            className={`nav-save-date ${activeMobileSection === 'save-the-date' ? 'is-active' : ''}`}
+            onClick={handleSaveTheDate}
+            aria-label="Navigate to the Save the Date section"
+          >
+            <CalendarHeart size={15} />
+            Save the Date
+          </button>
         </div>
 
         {/* Mobile menu toggle */}

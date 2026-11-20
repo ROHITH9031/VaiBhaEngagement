@@ -37,7 +37,7 @@ export default function Venue() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.1 }}
         >
-          Join Us at the Celebration
+          Your Presence Makes It More Special
         </motion.h2>
 
         <motion.div

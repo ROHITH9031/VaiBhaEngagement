@@ -29,12 +29,11 @@ export default function Footer() {
           {eventData.hashtag}
         </p>
 
-        {/* Couple Names */}
         <p
           className="font-heading text-base md:text-lg mb-6"
           style={{ color: 'var(--color-champagne)' }}
         >
-          {eventData.bride} ❤️ {eventData.groom}
+          A celebration of two hearts and two families.
         </p>
 
         {/* Decorative divider */}
@@ -43,19 +42,19 @@ export default function Footer() {
           style={{ background: 'linear-gradient(90deg, transparent, rgba(212, 168, 83, 0.3), transparent)' }}
         />
 
-        {/* Credit */}
+        {/* Credit
         <p
           className="text-xs tracking-[2px] flex items-center justify-center gap-1.5"
           style={{ color: 'rgba(245, 230, 204, 0.35)' }}
         >
-          Built with
+          Crafted with
           <Heart
             size={12}
             fill="var(--color-rose-gold)"
             style={{ color: 'var(--color-rose-gold)' }}
           />
           by Rohith Atyam
-        </p>
+        </p> */}
       </motion.div>
     </footer>
   );

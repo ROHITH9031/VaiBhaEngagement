@@ -32,7 +32,7 @@ export default function InvitationMessage() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.1 }}
         >
-          A Heartfelt Invitation
+          The Celebration
         </motion.h2>
 
         {/* Quote */}
@@ -84,9 +84,15 @@ export default function InvitationMessage() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.4 }}
         >
-          With hearts full of happiness,
-          <br />
-          we invite you to be a part of their special day.
+          A beautiful bond, two families, countless blessings,
+          <br className="hidden sm:block" />
+          and memories that will last forever.
+          <br /><br />
+          As we turn a new page in our story, we would love to celebrate
+          <br className="hidden sm:block" />
+          this precious moment surrounded by the people who make our lives special.
+          <br /><br />
+          Your presence will make our happiness complete!
         </motion.p>
 
         {/* Decorative divider */}

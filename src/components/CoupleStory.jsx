@@ -8,6 +8,7 @@ export default function CoupleStory() {
 
   return (
     <section
+      id="journey"
       ref={ref}
       className="section-padding"
       style={{ background: 'var(--color-dark-bg)' }}
@@ -31,7 +32,7 @@ export default function CoupleStory() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.1 }}
         >
-          The Beginning of Their Forever
+          From This Moment to Forever
         </motion.h2>
 
         <motion.div
@@ -66,9 +67,9 @@ export default function CoupleStory() {
               className="quote-text text-base md:text-lg"
               style={{ fontFamily: 'var(--font-heading)' }}
             >
-              Two beautiful souls, two different journeys,
+              A thousand little moments have brought us here.
               <br />
-              and one beautiful moment that brought their worlds together.
+              Now, a beautiful new chapter awaits.
             </p>
             <span
               className="absolute bottom-3 right-4 text-4xl opacity-20 font-script"
@@ -78,6 +79,21 @@ export default function CoupleStory() {
             </span>
           </div>
         </motion.div>
+
+        <motion.p
+          className="text-sm md:text-base leading-relaxed mb-8"
+          style={{
+            color: 'rgba(245, 230, 204, 0.7)',
+            fontFamily: 'var(--font-heading)',
+          }}
+          initial={{ opacity: 0, y: 15 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.4 }}
+        >
+          Today, we celebrate not just a promise, but the beginning of a journey
+          <br className="hidden sm:block" />
+          filled with understanding, laughter, friendship, and endless love.
+        </motion.p>
 
         {/* Couple Names */}
         <motion.h3

@@ -60,7 +60,7 @@ export default function EngagementDetails() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.1 }}
         >
-          {eventData.eventName}
+          A Day to Remember, A Moment to Cherish
         </motion.h2>
 
         <motion.div

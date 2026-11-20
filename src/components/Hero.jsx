@@ -67,7 +67,7 @@ export default function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2 }}
       >
-        A New Chapter Begins...
+        Every beautiful story has a beginning.
       </motion.p>
 
       {/* Couple Names — Main Display */}
@@ -103,11 +103,11 @@ export default function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.9, duration: 0.7 }}
       >
-        Together with their families,
-        <br />
-        they invite you to celebrate
-        <br />
-        the beginning of their beautiful journey.
+        Ours begins with a promise, a smile, and a lifetime of love waiting ahead.
+        <br className="hidden sm:block" />
+        With hearts full of happiness, we&apos;re inviting you to be part of a moment
+        <br className="hidden sm:block" />
+        that marks the beginning of our forever.
       </motion.p>
 
       {/* Couple Photos */}

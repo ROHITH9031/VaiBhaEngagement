@@ -13,15 +13,15 @@ export const eventData = {
   eventName: "Engagement Ceremony",
 
   date: "2026-12-03",
-  displayDate: "3rd December 2026",
+  displayDate: "December 03, 2026",
   displayDateShort: "03 • 12 • 2026",
   dayOfWeek: "Thursday",
 
   celebrationStart: "09:00",
   celebrationStartDisplay: "9:00 AM",
 
-  lunchTime: "12:30",
-  lunchTimeDisplay: "12:30 PM",
+  lunchTime: "13:30",
+  lunchTimeDisplay: "1:30 PM",
 
   // ------------------------------------------
   // VENUE CONFIGURATION
@@ -64,5 +64,5 @@ We would be delighted to have you with us on this special day. ❤️`
   },
 
   // Footer credit
-  credit: "Built with ❤️ by Rohith Atyam"
+  credit: "Crafted with ❤️ by Rohith Atyam"
 };

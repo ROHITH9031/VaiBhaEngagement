@@ -15,6 +15,7 @@ export default function FinalInvitation() {
 
   return (
     <section
+      id="save-the-date"
       ref={ref}
       className="section-padding bg-section-alt relative overflow-hidden"
     >
@@ -45,7 +46,7 @@ export default function FinalInvitation() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.1 }}
         >
-          Your Presence Is Our Greatest Gift
+          Here&apos;s to Love, Laughter &amp; Forever!
         </motion.h2>
 
         <motion.div
@@ -64,9 +65,11 @@ export default function FinalInvitation() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.3 }}
         >
-          "Come celebrate love, laughter, family
+          A new beginning, a beautiful promise, and a lifetime of memories
           <br className="hidden md:block" />
-          {' '}and the beginning of a beautiful forever."
+          {' '}waiting to be created.
+          <br /><br />
+          We can&apos;t wait to celebrate this special milestone with you!
         </motion.p>
 
         {/* Couple Names */}
@@ -89,7 +92,7 @@ export default function FinalInvitation() {
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.7, delay: 0.6 }}
         >
-          03 December 2026
+          {eventData.displayDate} | {eventData.dayOfWeek}
         </motion.p>
 
         {/* Hashtag */}
