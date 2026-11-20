@@ -10,7 +10,7 @@ const navItems = [
   { label: 'Location', href: '#venue' },
 ];
 
-export default function Navbar({ onSectionSelect }) {
+export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [activeMobileSection, setActiveMobileSection] = useState('home');
@@ -45,10 +45,8 @@ export default function Navbar({ onSectionSelect }) {
     setIsMobileOpen(false);
     const sectionId = href.replace('#', '');
     setActiveMobileSection(sectionId);
-    onSectionSelect?.(sectionId);
     const el = document.querySelector(href);
     if (el) {
-      window.dispatchEvent(new Event('vaibha:navigation'));
       el.scrollIntoView({ behavior: 'smooth' });
     } else {
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -64,6 +62,16 @@ export default function Navbar({ onSectionSelect }) {
     if (!mediaQuery.matches) {
       setActiveMobileSection('');
     }
+  }, []);
+
+  useEffect(() => {
+    const closeOnEscape = (event) => {
+      if (event.key === 'Escape') {
+        setIsMobileOpen(false);
+      }
+    };
+    window.addEventListener('keydown', closeOnEscape);
+    return () => window.removeEventListener('keydown', closeOnEscape);
   }, []);
 
   return (
