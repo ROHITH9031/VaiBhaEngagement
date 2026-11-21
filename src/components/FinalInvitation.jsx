@@ -4,12 +4,13 @@ import { CalendarHeart } from 'lucide-react';
 import { eventData } from '../data/eventData';
 import { createGoogleCalendarUrl } from '../utils/googleCalendar';
 
-export default function FinalInvitation() {
+export default function FinalInvitation({ onNavigateExternal }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   const handleSaveTheDate = () => {
     const calendarUrl = createGoogleCalendarUrl(eventData);
+    onNavigateExternal?.();
     window.open(calendarUrl, '_blank', 'noopener,noreferrer');
   };
 

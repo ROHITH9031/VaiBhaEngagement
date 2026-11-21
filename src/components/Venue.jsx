@@ -3,12 +3,13 @@ import { useRef } from 'react';
 import { MapPin, Navigation } from 'lucide-react';
 import { eventData } from '../data/eventData';
 
-export default function Venue() {
+export default function Venue({ onNavigateExternal }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   const handleGetDirections = () => {
     if (eventData.venue.mapsUrl) {
+      onNavigateExternal?.();
       window.open(eventData.venue.mapsUrl, '_blank', 'noopener,noreferrer');
     }
   };

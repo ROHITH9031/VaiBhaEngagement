@@ -16,10 +16,52 @@ import FloatingPetals from './components/FloatingPetals';
 
 function App() {
   const audioRef = useRef(null);
+  const isMusicMutedRef = useRef(false);
+  const navigationPauseRef = useRef(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isInvitationOpen, setIsInvitationOpen] = useState(false);
   const [showMainContent, setShowMainContent] = useState(false);
   const [isMusicMuted, setIsMusicMuted] = useState(false);
+
+  useEffect(() => {
+    isMusicMutedRef.current = isMusicMuted;
+  }, [isMusicMuted]);
+
+  useEffect(() => {
+    const pauseForNavigation = () => {
+      if (!audioRef.current || isMusicMutedRef.current) return;
+
+      navigationPauseRef.current = true;
+      audioRef.current.pause();
+    };
+
+    const resumeAfterNavigation = () => {
+      if (!navigationPauseRef.current || !audioRef.current || isMusicMutedRef.current) return;
+
+      navigationPauseRef.current = false;
+      audioRef.current.play().catch(() => {});
+    };
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        pauseForNavigation();
+      } else {
+        resumeAfterNavigation();
+      }
+    };
+
+    const handlePageShow = () => resumeAfterNavigation();
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    window.addEventListener('focus', resumeAfterNavigation);
+    window.addEventListener('pageshow', handlePageShow);
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('focus', resumeAfterNavigation);
+      window.removeEventListener('pageshow', handlePageShow);
+    };
+  }, []);
 
   // Lock scroll during loading and invitation
   useEffect(() => {
@@ -52,11 +94,20 @@ function App() {
 
     const nextMuted = !isMusicMuted;
     audioRef.current.muted = nextMuted;
+    isMusicMutedRef.current = nextMuted;
     setIsMusicMuted(nextMuted);
 
     if (!nextMuted) {
+      navigationPauseRef.current = false;
       audioRef.current.play().catch(() => {});
     }
+  };
+
+  const pauseMusicForExternalNavigation = () => {
+    if (!audioRef.current || isMusicMutedRef.current) return;
+
+    navigationPauseRef.current = true;
+    audioRef.current.pause();
   };
 
   const renderMainContent = () => {
@@ -66,8 +117,8 @@ function App() {
         <InvitationMessage />
         <EngagementDetails />
         <CoupleStory />
-        <Venue />
-        <FinalInvitation />
+        <Venue onNavigateExternal={pauseMusicForExternalNavigation} />
+        <FinalInvitation onNavigateExternal={pauseMusicForExternalNavigation} />
       </>
     );
   };
